@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <title>
+   LifeSync &mdash; Your life, in sync
+  </title>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="shell">
+   <aside class="sidebar">
+    <div class="brand">
+     <span class="brand-mark">
+      ✦
+     </span>
+     LifeSync
+    </div>
+    <nav aria-label="Main navigation" class="nav">
+     <button class="active" data-view="dashboard" type="button">
+      ▦ &nbsp; Dashboard
+     </button>
+     <button data-view="calendar" type="button">
+      ▤ &nbsp; Calendar
+     </button>
+     <button data-view="budget" type="button">
+      ◉ &nbsp; Budget
+     </button>
+     <button data-view="tasks" type="button">
+      ☑ &nbsp; Tasks
+     </button>
+    </nav>
+    <div class="sidebar-foot">
+     LifeSync &middot; ITCC298 Prototype
+Saved on this device only
+    </div>
+   </aside>
+   <main class="main">
+    <header class="top">
+     <div>
+      <div class="eyebrow" id="today">
+      </div>
+      <h1 id="heading">
+       Your day, in sync
+      </h1>
+      <p class="page-subtitle">
+       A simpler way to manage your everyday life.
+      </p>
+     </div>
+     <div class="top-actions">
+      <button aria-label="Toggle light and dark mode" class="btn" id="theme" type="button">
+       ☾ Dark mode
+      </button>
+      <button class="btn primary" id="quickAdd" type="button">
+       ＋ Add task
+      </button>
+     </div>
+    </header>
+    <section class="section active" id="dashboard">
+     <div class="cards">
+      <div class="card">
+       <span aria-hidden="true" class="symbol">
+        📅
+       </span>
+       <div class="label">
+        Upcoming events
+       </div>
+       <div class="number" id="statEvents">
+        0
+       </div>
+       <div class="hint">
+        Scheduled from today
+       </div>
+      </div>
+      <div class="card">
+       <span aria-hidden="true" class="symbol">
+        &checkmark;
+       </span>
+       <div class="label">
+        Tasks to do
+       </div>
+       <div class="number" id="statTasks">
+        0
+       </div>
+       <div class="hint">
+        Not yet completed
+       </div>
+      </div>
+      <div class="card">
+       <span aria-hidden="true" class="symbol">
+        💳
+       </span>
+       <div class="label">
+        Budget remaining
+       </div>
+       <div class="number" id="statBalance">
+        $0
+       </div>
+       <div class="hint">
+        Income minus expenses
+       </div>
+      </div>
+      <div class="card">
+       <span aria-hidden="true" class="symbol">
+        🎯
+       </span>
+       <div class="label">
+        Tasks completed
+       </div>
+       <div class="number" id="statDone">
+        0%
+       </div>
+       <div class="hint">
+        Your completion rate
+       </div>
+      </div>
+     </div>
+     <div class="layout">
+      <div class="stack">
+       <div class="panel">
+        <div class="panel-head">
+         <h2>
+          Upcoming schedule
+         </h2>
+         <button class="btn small" data-go="calendar" type="button">
+          View calendar &rarr;
+         </button>
+        </div>
+        <div id="dashboardEvents">
+        </div>
+        <div class="legend">
+         <span>
+          <i class="dot">
+          </i>
+          Work
+         </span>
+         <span>
+          <i class="dot" style="background:#ef80a7">
+          </i>
+          Personal
+         </span>
+         <span>
+          <i class="dot" style="background:#e7a544">
+          </i>
+          School
+         </span>
+         <span>
+          <i class="dot" style="background:#21b7a0">
+          </i>
+          Travel
+         </span>
+        </div>
+       </div>
+       <div class="panel">
+        <div class="panel-head">
+         <h2>
+          Daily tasks
+         </h2>
+         <button class="btn small" data-go="tasks" type="button">
+          Manage tasks &rarr;
+         </button>
+        </div>
+        <div id="dashboardTasks">
+        </div>
+       </div>
+      </div>
+      <div class="stack">
+       <div class="panel">
+        <div class="panel-head">
+         <h2>
+          Budget overview
+         </h2>
+         <button class="btn small" data-go="budget" type="button">
+          View budget &rarr;
+         </button>
+        </div>
+        <div class="muted">
+         Monthly spending compared with income
+        </div>
+        <div class="progress">
+         <div id="budgetProgress">
+         </div>
+        </div>
+        <div class="budget-row">
+         <span>
+          Income
+         </span>
+         <strong id="dashIncome">
+         </strong>
+        </div>
+        <div class="budget-row">
+         <span>
+          Expenses
+         </span>
+         <strong id="dashExpenses">
+         </strong>
+        </div>
+        <div class="budget-row">
+         <span>
+          Remaining
+         </span>
+         <strong id="dashRemaining">
+         </strong>
+        </div>
+       </div>
+       <div class="panel">
+        <h2 class="form-heading">
+         One place for everyday life
+        </h2>
+        <p class="muted" style="line-height:1.7">
+         Plan work, personal time, school, and travel. Keep your budget and to-do list alongside your schedule.
+        </p>
+        <div class="notice">
+         Coming later: vacation planning, groceries, family sharing, vehicle maintenance, and more.
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+    <section class="section" id="calendar">
+     <h2 class="view-title">
+      Calendar &amp; scheduling
+     </h2>
+     <div class="split">
+      <div class="panel">
+       <h2 class="form-heading">
+        Add an event
+       </h2>
+       <form class="form" id="eventForm">
+        <label class="wide">
+         Event name
+         <input maxlength="90" name="title" placeholder="e.g. Work shift" required=""/>
+        </label>
+        <label>
+         Date
+         <input name="date" required="" type="date"/>
+        </label>
+        <label>
+         Time
+         <input name="time" required="" type="time"/>
+        </label>
+        <label class="wide">
+         Category
+         <select name="category">
+          <option value="work">
+           Work
+          </option>
+          <option value="personal">
+           Personal
+          </option>
+          <option value="school">
+           School
+          </option>
+          <option value="travel">
+           Travel
+          </option>
+         </select>
+        </label>
+        <button class="btn primary wide">
+         ＋ Add event
+        </button>
+       </form>
+      </div>
+      <div class="panel">
+       <div class="panel-head">
+        <h2>
+         Scheduled events
+        </h2>
+        <span class="mini">
+         Sorted by date
+        </span>
+       </div>
+       <div id="allEvents">
+       </div>
+      </div>
+     </div>
+    </section>
+    <section class="section" id="budget">
+     <h2 class="view-title">
+      Budget &amp; bills
+     </h2>
+     <div class="split">
+      <div class="panel">
+       <h2 class="form-heading">
+        Add income or expense
+       </h2>
+       <form class="form" id="moneyForm">
+        <label class="wide">
+         Description
+         <input maxlength="90" name="title" placeholder="e.g. Grocery shopping" required=""/>
+        </label>
+        <label>
+         Amount ($)
+         <input max="100000000" min="0.01" name="amount" placeholder="0.00" required="" step="0.01" type="number"/>
+        </label>
+        <label>
+         Type
+         <select name="type">
+          <option value="expense">
+           Expense
+          </option>
+          <option value="income">
+           Income
+          </option>
+         </select>
+        </label>
+        <button class="btn primary wide">
+         ＋ Save entry
+        </button>
+       </form>
+       <div class="notice">
+        This prototype uses manual entries only. No bank accounts are connected.
+       </div>
+      </div>
+      <div class="panel">
+       <h2>
+        Budget summary
+       </h2>
+       <div class="budget-row">
+        <span>
+         Total income
+        </span>
+        <strong id="income">
+        </strong>
+       </div>
+       <div class="budget-row">
+        <span>
+         Total expenses
+        </span>
+        <strong id="expenses">
+        </strong>
+       </div>
+       <div class="budget-row">
+        <span>
+         Remaining
+        </span>
+        <strong id="remaining">
+        </strong>
+       </div>
+       <h2 class="form-heading">
+        Entries
+       </h2>
+       <div id="allMoney">
+       </div>
+      </div>
+     </div>
+    </section>
+    <section class="section" id="tasks">
+     <h2 class="view-title">
+      Tasks &amp; reminders
+     </h2>
+     <div class="split">
+      <div class="panel">
+       <h2 class="form-heading">
+        Create a task
+       </h2>
+       <form class="form" id="taskForm">
+        <label class="wide">
+         Task name
+         <input maxlength="90" name="title" placeholder="e.g. Finish school assignment" required=""/>
+        </label>
+        <label class="wide">
+         Due date (optional)
+         <input name="date" type="date"/>
+        </label>
+        <button class="btn primary wide">
+         ＋ Add task
+        </button>
+       </form>
+      </div>
+      <div class="panel">
+       <div class="panel-head">
+        <h2>
+         Your tasks
+        </h2>
+        <span class="mini" id="taskCount">
+        </span>
+       </div>
+       <div id="allTasks">
+       </div>
+      </div>
+     </div>
+    </section>
+   </main>
+  </div>
+  <nav aria-label="Mobile navigation" class="mobile-nav">
+   <button class="active" data-view="dashboard" type="button">
+    <span>
+     ▦
+    </span>
+    Home
+   </button>
+   <button data-view="calendar" type="button">
+    <span>
+     ▤
+    </span>
+    Calendar
+   </button>
+   <button data-view="budget" type="button">
+    <span>
+     ◉
+    </span>
+    Budget
+   </button>
+   <button data-view="tasks" type="button">
+    <span>
+     ☑
+    </span>
+    Tasks
+   </button>
+  </nav>
+  <script src="script.js">
+  </script>
+ </body>
+</html>
